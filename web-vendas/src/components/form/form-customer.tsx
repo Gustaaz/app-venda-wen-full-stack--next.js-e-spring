@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { customerSchema } from '@/schema/customer-schema'
 import { InputCPF } from '../input-mask/input-cpf'
 import { InputPhone } from '../input-mask/input-phone'
+import { InputDate } from '../input-mask/input-date'
 export function FormCustomer() {
   const {
     formState: { errors },
@@ -74,7 +75,7 @@ export function FormCustomer() {
           placeholder="000.000.000-00"
           error={errors.cpf && errors.cpf.message}
         />
-        <Input
+        <InputDate
           {...register('dataNascimento')}
           id="dataNascimento"
           label="Data de Nascimento"
