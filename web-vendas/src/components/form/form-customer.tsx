@@ -6,6 +6,7 @@ import { Customer } from '@/types/customer'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { customerSchema } from '@/schema/customer-schema'
 import { InputCPF } from '../input-mask/input-cpf'
+import { InputPhone } from '../input-mask/input-phone'
 export function FormCustomer() {
   const {
     formState: { errors },
@@ -96,13 +97,13 @@ export function FormCustomer() {
         <Input
           {...register('email')}
           id="email"
-          label="email"
+          label="Email"
           type="text"
           className="w-full"
           placeholder="jpj2K@example.com"
           error={errors.email && errors.email.message}
         />
-        <Input
+        <InputPhone
           {...register('telefone')}
           id="telefone"
           label="Telefone"
