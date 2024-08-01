@@ -13,8 +13,13 @@ export const itemsSidebars: ItemsSidebar[] = [
     icon: 'House',
   },
   {
-    name: 'Agendamentos',
+    name: 'Produtos',
     href: '/inicio/produtos',
     icon: 'Package',
+  },
+  {
+    name: 'Clientes',
+    href: '/inicio/clientes',
+    icon: 'Contact',
   },
 ]
