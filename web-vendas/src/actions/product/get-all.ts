@@ -1,6 +1,6 @@
 'use server'
 import { Product } from '@/types/product'
-import { resourceURLProduct } from '@/ultls/resouce-url-product'
+import { resourceURLProduct } from '@/ultls/resouce-url-api'
 
 export const getAll = async (): Promise<Product[]> => {
   const response = await fetch(resourceURLProduct, {

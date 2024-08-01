@@ -1,5 +1,5 @@
 'use server'
-import { resourceURLProduct } from '@/ultls/resouce-url-product'
+import { resourceURLProduct } from '@/ultls/resouce-url-api'
 import { revalidatePath } from 'next/cache'
 
 export const deleteById = async (id: number): Promise<void> => {
