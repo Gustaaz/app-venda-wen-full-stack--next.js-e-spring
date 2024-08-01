@@ -2,6 +2,7 @@
 import { useSearchParams } from 'next/navigation'
 import { Button, Input, Textarea } from '../ui'
 import { useFormProduct } from '@/hooks/use-form-product'
+import { InputMoney } from '../input-mask/input-money'
 
 export function FormProduct() {
   const searchParams = useSearchParams()
@@ -13,7 +14,6 @@ export function FormProduct() {
     reset,
     onError,
     onSubmit,
-    registerWithMask,
   } = useFormProduct({ searchParams })
 
   return (
@@ -49,11 +49,8 @@ export function FormProduct() {
           placeholder="Digite o SKU do produto"
           error={errors.sku?.message}
         />
-        <Input
-          {...registerWithMask('preco', 'brl-currency', {
-            rightAlign: false,
-            required: true,
-          })}
+        <InputMoney
+          {...register('preco')}
           id="preco"
           label="Preço"
           autoComplete="off"
