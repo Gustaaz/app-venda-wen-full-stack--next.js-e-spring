@@ -1,22 +1,22 @@
-import { PlusCircle } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { PlusCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import Link from 'next/link'
-import { TableProducts } from '@/components/table-product'
-import { getAll } from '@/actions/product/get-all'
+} from "@/components/ui/card";
+import Link from "next/link";
+import { TableProducts } from "@/components/table-product";
+import { getAll } from "@/actions/product/get-all";
 
 export default async function Product() {
-  const products = await getAll()
+  const products = await getAll();
 
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-4">
-      <div className="grid gap-2">
+      <div className="grid gap-4">
         <Link href="/inicio/produtos/cadastro" className="ml-auto">
           <Button size="sm" className="h-8 gap-1">
             <PlusCircle className="h-3.5 w-3.5" />
@@ -58,5 +58,5 @@ export default async function Product() {
         </Card>
       </div>
     </main>
-  )
+  );
 }
