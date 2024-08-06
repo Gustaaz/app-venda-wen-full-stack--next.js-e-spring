@@ -2,6 +2,8 @@ package com.gustavo.vendasapi.customer;
 
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,18 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<CustomerFormRequest> save(@RequestBody CustomerFormRequest customerFormRequest) {
+        // return Ok(repo.save(Model))
+        /**
+         * Entity retornada da View
+         */
         CustomerEntity customer = customerFormRequest.toModel();
+        /**
+         * Reposotorio persiste o Entity
+         */
         customerRepository.save(customer);
+        /**
+         * Response da View
+         */
         return ResponseEntity.ok(CustomerFormRequest.fromModel(customer));
     }
 
@@ -55,7 +67,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<CustomerFormRequest> getAll() {
-        return customerRepository.findAll().stream().map(CustomerFormRequest::fromModel).toList();
+    public Page<CustomerFormRequest> getAll(@RequestParam(value="nome", required = false, defaultValue = "") String nome, @RequestParam(value="cpf", required = false, defaultValue = "") String cpf, Pageable pageable) {
+       return customerRepository.searchToNameCPF(nome, cpf, pageable).map(CustomerFormRequest::fromModel);
     }
 }
