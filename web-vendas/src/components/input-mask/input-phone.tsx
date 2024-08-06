@@ -4,8 +4,12 @@ import { FormatUtils } from '@4us-dev/utils'
 
 const formatterUltil = new FormatUtils()
 
-export const InputPhone = forwardRef<HTMLInputElement, InputProps>(
+const InputPhone = forwardRef<HTMLInputElement, InputProps>(
   ({ ...props }, ref) => {
     return <Input {...props} formatter={formatterUltil.formatPhone} ref={ref} />
   },
 )
+
+InputPhone.displayName = 'InputPhone'
+
+export { InputPhone }

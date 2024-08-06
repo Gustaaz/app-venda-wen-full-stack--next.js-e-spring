@@ -14,11 +14,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, label, error, formatter, onChange, ...props }, ref) => {
     function onInputChange(event: React.ChangeEvent<HTMLInputElement>) {
       const { value, name } = event.target
-
       const formattedValue = (formatter && formatter(value, name)) || value
-      console.log(formattedValue)
-
       event.target.value = formattedValue
+
+      onChange && onChange(event)
     }
     return (
       <div className="grid w-full gap-2">
@@ -39,7 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
-        <p className="h-3 text-sm text-red-500">{error && error}</p>
+        {error && <p className="h-3 text-sm text-red-500">{error}</p>}
       </div>
     )
   },

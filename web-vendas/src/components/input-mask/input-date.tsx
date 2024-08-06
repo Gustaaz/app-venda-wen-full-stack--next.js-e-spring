@@ -3,7 +3,7 @@ import { forwardRef } from 'react'
 import { FormatUtils } from '@4us-dev/utils'
 
 const formatterUltil = new FormatUtils()
-export const InputDate = forwardRef<HTMLInputElement, InputProps>(
+const InputDate = forwardRef<HTMLInputElement, InputProps>(
   ({ ...props }, ref) => {
     const formaterDate = (value: string) => {
       const data = formatterUltil.formatOnlyIntegers(value)
@@ -36,3 +36,7 @@ export const InputDate = forwardRef<HTMLInputElement, InputProps>(
     )
   },
 )
+
+InputDate.displayName = 'InputDate'
+
+export { InputDate }
