@@ -17,7 +17,6 @@ export const getAll = async ({
   size = 10,
 }: GetAllProps): Promise<Page<Customer>> => {
   const url = `${resourceURLCustomer}?nome=${nome}&cpf=${cpf}&page=${page}&size=${size}`
-  console.log(url)
   const response = await fetch(url, {
     method: 'GET',
   })
