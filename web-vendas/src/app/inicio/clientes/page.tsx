@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui'
-import { DataTableCustomer } from '@/components/data-table-customer/data-table-customer'
+import { DataTableCustomer } from '@/components/data-table-customer'
 import { getAll } from '@/actions/customer/get-all'
 
 export default async function Customers({
