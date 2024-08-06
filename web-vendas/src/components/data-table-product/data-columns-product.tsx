@@ -14,7 +14,8 @@ import {
 } from '../ui'
 import Link from 'next/link'
 import { MoreHorizontal } from 'lucide-react'
-import { DialogDeleteProduct } from '../table-product/dialog-delete-product'
+import { DialogDeleteProduct } from './dialog-delete-product'
+
 
 export const dataColumnsProduct: ColumnDef<Product>[] = [
   {
