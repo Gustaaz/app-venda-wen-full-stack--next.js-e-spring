@@ -18,7 +18,7 @@ public class ProductController {
     @PostMapping
     public ProductFormRequest save(@RequestBody ProductFormRequest productFormRequest) {
 
-        ProductEntity product = productFormRequest.toModel();
+        Product product = productFormRequest.toModel();
 
         productRepository.save(product);
 
@@ -33,19 +33,19 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductFormRequest> getById(@PathVariable Long id) {
-        Optional<ProductEntity> productExists = productRepository.findById(id);
-        return productExists.map(productEntity -> ResponseEntity.ok(ProductFormRequest.fromModel(productEntity))).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<Product> productExists = productRepository.findById(id);
+        return productExists.map(product -> ResponseEntity.ok(ProductFormRequest.fromModel(product))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ProductFormRequest productFormRequest) {
-        Optional<ProductEntity> productExists = productRepository.findById(id);
+        Optional<Product> productExists = productRepository.findById(id);
 
         if(productExists.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        ProductEntity product = productFormRequest.toModel();
+        Product product = productFormRequest.toModel();
         product.setId(id);
         productRepository.save(product);
 
@@ -54,7 +54,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        Optional<ProductEntity> productExists = productRepository.findById(id);
+        Optional<Product> productExists = productRepository.findById(id);
         if(productExists.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

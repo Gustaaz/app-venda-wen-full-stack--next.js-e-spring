@@ -30,11 +30,11 @@ public class ProductFormRequest {
         this.dataCadastro = dataCadastro;
     }
 
-    public ProductEntity toModel() {
-        return new ProductEntity(id, nome, descricao, preco, sku, dataCadastro);
+    public Product toModel() {
+        return new Product(id, nome, descricao, preco, sku, dataCadastro);
     }
 
-    public static ProductFormRequest fromModel(ProductEntity product) {
+    public static ProductFormRequest fromModel(Product product) {
         return new ProductFormRequest(
                 product.getId(),
                 product.getNome(),
