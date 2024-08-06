@@ -12,6 +12,5 @@ export const getById = async (id: string): Promise<Product> => {
   }
 
   const product = (await response.json()) as Promise<Product>
-  await new Promise((resolve) => setTimeout(resolve, 1000))
   return product
 }
