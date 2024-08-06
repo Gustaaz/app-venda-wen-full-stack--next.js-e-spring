@@ -16,7 +16,6 @@ import Link from 'next/link'
 import { MoreHorizontal } from 'lucide-react'
 import { DialogDeleteProduct } from './dialog-delete-product'
 
-
 export const dataColumnsProduct: ColumnDef<Product>[] = [
   {
     id: 'select',

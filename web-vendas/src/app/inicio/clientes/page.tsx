@@ -17,10 +17,11 @@ export default async function Customers({
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
   const selectedPage = (Number(searchParams?.page) || 0) as number
+  const nameFilter = (searchParams?.nome || '') as string
 
   const customers = await getAll({
     cpf: '',
-    nome: '',
+    nome: nameFilter.toUpperCase(),
     page: selectedPage,
     size: 10,
   })
@@ -42,10 +43,9 @@ export default async function Customers({
             <CardDescription>Gerencie seus clientes.</CardDescription>
           </CardHeader>
           <CardContent>
-            {customers.content.length > 0 && (
-              <DataTableCustomer pageCustomer={customers} />
-            )}
-            {customers.content.length === 0 && (
+            <DataTableCustomer pageCustomer={customers} />
+
+            {/* {customers.content.length === 0 && (
               <div className="flex h-96 flex-1 items-center justify-center rounded-lg shadow-sm">
                 <div className="flex flex-col items-center gap-1 text-center">
                   <h3 className="text-2xl font-bold tracking-tight">
@@ -64,7 +64,7 @@ export default async function Customers({
                   </Link>
                 </div>
               </div>
-            )}
+            )} */}
           </CardContent>
         </Card>
       </div>

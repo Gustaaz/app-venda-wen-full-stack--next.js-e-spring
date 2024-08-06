@@ -11,6 +11,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 type UseDataTableCustomerProps = {
@@ -23,6 +24,8 @@ export function useDataTableCustomer({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
+  const { replace } = useRouter()
+  const pathname = usePathname()
 
   const table = useReactTable({
     data: pageCustomer.content,
@@ -56,5 +59,16 @@ export function useDataTableCustomer({
     (_, index) => startPage + index,
   )
 
-  return { table, pagesToDisplay }
+  function handleSearch(term: string, searchParams: URLSearchParams) {
+    const params = new URLSearchParams(searchParams)
+    if (term) {
+      params.set('nome', term)
+      params.set('page', '0')
+    } else {
+      params.delete('nome')
+    }
+    replace(`${pathname}?${params.toString()}`)
+  }
+
+  return { table, pagesToDisplay, handleSearch }
 }

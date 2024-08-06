@@ -20,27 +20,34 @@ import {
   TableRow,
 } from '../ui'
 import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
-import React from 'react'
 import { Page } from '@/types/page'
 import Link from 'next/link'
 import { dataColumnsCustomer } from './data-columns-customer'
 import { useDataTableCustomer } from '@/hooks/use-data-table-customer'
+import { useSearchParams } from 'next/navigation'
 
 type DataTableCustomerProps = {
   pageCustomer: Page<Customer>
 }
+
 export function DataTableCustomer({ pageCustomer }: DataTableCustomerProps) {
-  const { pagesToDisplay, table } = useDataTableCustomer({ pageCustomer })
+  const { pagesToDisplay, table, handleSearch } = useDataTableCustomer({
+    pageCustomer,
+  })
+  const searchParams = useSearchParams()
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filtre por email"
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('email')?.setFilterValue(event.target.value)
-          }
+          id="nome"
+          name="nome"
+          autoComplete="off"
+          placeholder="Filtre por nome"
+          onChange={(e) => {
+            handleSearch(e.target.value, searchParams)
+          }}
+          defaultValue={searchParams.get('nome')?.toString()}
           className="max-w-sm"
         />
         <DropdownMenu>

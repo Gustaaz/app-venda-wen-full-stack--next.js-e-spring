@@ -34,10 +34,10 @@ export function DataTableProduct({ data }: DataTableProductProps) {
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+          placeholder="Filtre por nome..."
+          value={(table.getColumn('nome')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table.getColumn('email')?.setFilterValue(event.target.value)
+            table.getColumn('nome')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
