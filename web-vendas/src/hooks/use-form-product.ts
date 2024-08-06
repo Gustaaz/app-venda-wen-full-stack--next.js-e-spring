@@ -68,7 +68,6 @@ export function useFormProduct({ searchParams }: FormProductProps) {
         setValue('dataCadastro', response.dataCadastro)
       }
     } catch (error) {
-      console.log(error)
       toast({
         title: 'Erro ao salvar o produto',
         description: getValues('id')
