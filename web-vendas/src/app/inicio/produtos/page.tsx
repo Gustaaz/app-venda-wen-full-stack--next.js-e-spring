@@ -8,8 +8,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import Link from 'next/link'
-import { TableProducts } from '@/components/table-product'
 import { getAll } from '@/actions/product/get-all'
+import { DataTableProduct } from '@/components/data-table-product'
 
 export default async function Product() {
   const products = await getAll()
@@ -31,7 +31,7 @@ export default async function Product() {
             <CardDescription>Gerencie seus produtos.</CardDescription>
           </CardHeader>
           <CardContent>
-            {products.length > 0 && <TableProducts products={products} />}
+            {products.length > 0 && <DataTableProduct data={products} />}
             {products.length === 0 && (
               <>
                 <div className="flex h-96 flex-1 items-center justify-center rounded-lg shadow-sm">

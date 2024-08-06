@@ -1,4 +1,4 @@
-import { Customer } from '@/types/customer'
+import { Product } from '@/types/product'
 import { ColumnDef } from '@tanstack/react-table'
 import {
   Button,
@@ -12,11 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui'
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
-import { DialogDeleteCustomer } from './dialog-delete-customer'
 import Link from 'next/link'
+import { MoreHorizontal } from 'lucide-react'
+import { DialogDeleteProduct } from '../table-product/dialog-delete-product'
 
-export const dataColumnsCustomer: ColumnDef<Customer>[] = [
+export const dataColumnsProduct: ColumnDef<Product>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -42,63 +42,54 @@ export const dataColumnsCustomer: ColumnDef<Customer>[] = [
   {
     accessorKey: 'id',
     header: 'Codigo',
-    cell: ({ row }) => <div className="capitalize">{row.getValue('id')}</div>,
+    cell: ({ row }) => <div className="font-medium">{row.getValue('id')}</div>,
+  },
+  {
+    accessorKey: 'sku',
+    header: 'Sku',
+    cell: ({ row }) => <div className="lowercase">{row.getValue('sku')}</div>,
   },
   {
     accessorKey: 'nome',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Nome
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    header: 'Nome',
+    cell: ({ row }) => <div className="lowercase">{row.getValue('nome')}</div>,
+  },
+  {
+    accessorKey: 'descricao',
+    header: 'Descrição',
+    cell: ({ row }) => (
+      <div className="lowercase">{row.getValue('descricao')}</div>
+    ),
+  },
+  {
+    accessorKey: 'preco',
+    header: 'Preço',
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue('preco'))
 
-    cell: ({ row }) => {
-      return <div className="font-medium">{row.getValue('nome')}</div>
-    },
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+      // Format the amount as a dollar amount
+      const formatted = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(amount)
 
-    cell: ({ row }) => {
-      return <div className="font-medium">{row.getValue('email')}</div>
+      return <div className="font-medium">{formatted}</div>
     },
   },
   {
-    accessorKey: 'cpf',
-    header: 'CPF',
-    cell: ({ row }) => <div className="lowercase">{row.getValue('cpf')}</div>,
-  },
-  {
-    accessorKey: 'dataNascimento',
-    header: () => <div className="">Data de Nascimento</div>,
-    cell: ({ row }) => {
-      return <div className="lowercase">{row.getValue('dataNascimento')}</div>
-    },
+    accessorKey: 'dataCadastro',
+    header: 'Data de Cadastro',
+    cell: ({ row }) => (
+      <div className="w-2 overflow-hidden truncate lowercase">
+        {row.getValue('dataCadastro')}
+      </div>
+    ),
   },
   {
     id: 'actions',
     enableHiding: false,
-    cell: ({ row, table }) => {
-      const customer = row.original
-      const qtdRows = table.getFilteredRowModel().rows.length
-      const page = table.getState().pagination.pageIndex
+    cell: ({ row }) => {
+      const product = row.original
 
       return (
         <DropdownMenu>
@@ -112,7 +103,10 @@ export const dataColumnsCustomer: ColumnDef<Customer>[] = [
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href={`/inicio/clientes/cadastro?id=${customer.id}`}>
+              <Link
+                className="w-full"
+                href={`/inicio/produtos/cadastro?id=${product.id}`}
+              >
                 Editar
               </Link>
             </DropdownMenuItem>
@@ -125,11 +119,7 @@ export const dataColumnsCustomer: ColumnDef<Customer>[] = [
                   Deletar
                 </DropdownMenuItem>
               </DialogTrigger>
-              <DialogDeleteCustomer
-                idCustomer={customer.id!}
-                qtdRows={qtdRows}
-                page={page}
-              />
+              <DialogDeleteProduct idProduct={product.id!} />
             </Dialog>
           </DropdownMenuContent>
         </DropdownMenu>
