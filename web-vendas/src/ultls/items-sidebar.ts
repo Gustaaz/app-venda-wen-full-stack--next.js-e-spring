@@ -22,4 +22,9 @@ export const itemsSidebars: ItemsSidebar[] = [
     href: '/inicio/clientes',
     icon: 'Contact',
   },
+  {
+    name: 'Vendas',
+    href: '/inicio/vendas',
+    icon: 'Wallet',
+  },
 ]
