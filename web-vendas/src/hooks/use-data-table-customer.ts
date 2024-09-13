@@ -59,10 +59,10 @@ export function useDataTableCustomer({
     (_, index) => startPage + index,
   )
 
-  function handleSearch(term: string, searchParams: URLSearchParams) {
+  function handleSearch(value: string, searchParams: URLSearchParams) {
     const params = new URLSearchParams(searchParams)
-    if (term) {
-      params.set('nome', term)
+    if (value) {
+      params.set('nome', value)
       params.set('page', '0')
     } else {
       params.delete('nome')
